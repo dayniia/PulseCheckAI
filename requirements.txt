@@ -1,8 +1,9 @@
-streamlit
-streamlit-autorefresh
-psutil
-pandas
-numpy
+streamlit==1.66.1
+streamlit-autorefresh==1.0.1
+psutil==7.2.2
+pandas==3.1.0
+numpy==2.5.4
 scikit-learn==1.6.1
-joblib
-plotly
+joblib==1.6.0
+plotly==7.1.0
+pytest==9.1.1

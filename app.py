@@ -652,10 +652,12 @@ if history:
         except Exception as exc:
             st.error(f"Prediction inference error: {exc}")
             latest_sample["anomaly_score"] = np.nan
-            latest_sample["is_anomaly"] = False
+            # Use None, not False — False would silently show NORMAL on the dashboard.
+            latest_sample["is_anomaly"] = None
     else:
+        # feature_row is None during warmup or when features contain NaN.
         latest_sample["anomaly_score"] = np.nan
-        latest_sample["is_anomaly"] = False
+        latest_sample["is_anomaly"] = None
 
 
 # --------------------------------------------------
@@ -760,8 +762,11 @@ cpu = float(latest["cpu_usage"])
 memory = float(latest["memory_usage"])
 disk = float(latest.get("disk_usage", 0.0))
 score = latest.get("anomaly_score", np.nan)
-is_anomaly_val = latest.get("is_anomaly", False)
+# Use None as the explicit "unknown" sentinel — do not default to False
+# (False would silently render NORMAL when prediction has not been made).
+is_anomaly_val = latest.get("is_anomaly", None)
 is_warming_up = len(history) < ROLLING_5M
+
 
 
 # --------------------------------------------------
@@ -921,7 +926,7 @@ elif pd.isna(score):
         "The latest prediction could not be calculated. Telemetry features may be incomplete or an inference error occurred."
     )
     score_display = "Unavailable"
-elif is_anomaly_val:
+elif is_anomaly_val is True:
     banner_state = "state-anomaly"
     status_tag_color = "#D6A45D"
     status_tag_text = "ANOMALY DETECTED"
