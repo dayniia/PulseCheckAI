@@ -1,0 +1,25 @@
+{
+    "model_name": "PulseCheck AI",
+    "algorithm": "IsolationForest",
+    "features": [
+        "cpu_usage",
+        "memory_usage",
+        "cpu_usage_change",
+        "memory_usage_change",
+        "cpu_usage_rolling_mean_1m",
+        "memory_usage_rolling_mean_1m",
+        "cpu_usage_rolling_mean_5m",
+        "memory_usage_rolling_mean_5m",
+        "cpu_usage_rolling_std_5m",
+        "memory_usage_rolling_std_5m"
+    ],
+    "anomaly_score_definition": "-model.decision_function(X)",
+    "anomaly_threshold": 0.10000384221612314,
+    "target_validation_precision": 0.8,
+    "selected_validation_precision": 0.804093567251462,
+    "selected_validation_recall": 0.8308157099697885,
+    "sampling_interval_seconds": 15,
+    "rolling_window_1m_samples": 4,
+    "rolling_window_5m_samples": 20,
+    "label_definition": "Documented CPU or memory disturbance intervals"
+}
