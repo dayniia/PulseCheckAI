@@ -61,6 +61,8 @@ The training workflow used a chronological split to preserve time order:
 
 The validation partition was used to select the anomaly detection threshold.
 
+The full training workflow is documented in [`PulseCheck_AI_Model_Training_Notebook.ipynb`](../PulseCheck_AI_Model_Training_Notebook.ipynb).
+
 ## 5. Threshold Selection
 
 The model's anomaly score is calculated by negating the output of `decision_function`.
